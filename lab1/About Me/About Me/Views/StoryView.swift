@@ -16,13 +16,18 @@ struct StoryView: View {
                         Section(header:
                                     Text(story.topic)
                             .font(.headline)
-                            .padding(0)
+                            .padding(10)
                                 
                         ) {
                             Text(story.body)
                             if story.topic == "Hobbies" {
                                 NavigationLink(destination: CarouselView()) {
                                     Text("Some Pictures from last year")
+                                }
+                                .foregroundStyle(Color.blue)
+                            } else if story.topic == "Education" {
+                                NavigationLink(destination: SkillsView()) {
+                                    Text("My Skills")
                                 }
                                 .foregroundStyle(Color.blue)
                             }

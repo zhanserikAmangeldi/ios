@@ -19,10 +19,15 @@ struct ContentView: View {
                 .tag(0)
 
             StoryView(selectedTab: $selectedTab)
-            .tabItem {
-                Label("Story", systemImage: "book")
-            }
-            .tag(1)
+                .tabItem {
+                    Label("Story", systemImage: "book")
+                }
+                .tag(1)
+            RandomFactsView()
+                .tabItem {
+                    Label("Random Facts", systemImage: "info.circle")
+                }
+                .tag(2)
             
         }
     }
