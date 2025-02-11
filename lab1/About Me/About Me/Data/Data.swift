@@ -6,6 +6,7 @@ struct Info {
     let image: String
     let name: String
     let shortDescription: String
+    let briefBio: String
     let story: [Story]
     let soft_skills: [String]
     let hard_skills: [(String, [String])]
@@ -26,7 +27,8 @@ struct Fact {
 let information = Info(
     image: "Photo",
     name: "Zhanserik Amangeldi",
-    shortDescription: "19 y.o. mountain lover",
+    shortDescription: "19 y.o. mountain lover from Almaty",
+    briefBio: "\tI am Amangeldi Zhanserik, born in 2005 in Arys, South Kazakhstan. Due to my parents' work, I moved to Atyrau, where I grew up. Currently, I live in Almaty, studying Information Systems at Kazakh-British Technical University. In my free time, I enjoy outdoor activities and capturing mountain landscapes through photography.",
     story: [
         Story(topic: "Background", body: "I am Amangeldi Zhanserik, I was born in 2005 and spent my childhood in the city of Arys, South Kazakhstan.  Because of my parents' work, we had to move to another city, and I spent my entire boyhood in Atyrau, Western Kazakhstan. I currently live in Almaty."),
         Story(topic: "Education", body: "- National gymnasium No. 13 (Atyrau)\n- Kazakh-British Technical University, School of Information System and Engineering, Information System 2022-2026 (Almaty)"),

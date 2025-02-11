@@ -18,18 +18,28 @@ struct ContentView: View {
                 }
                 .tag(0)
 
-            StoryView(selectedTab: $selectedTab)
+//            StoryView(selectedTab: $selectedTab)
+//                .tabItem {
+//                    Label("Story", systemImage: "book")
+//                }
+//                .tag(1)
+            HobbiesView()
                 .tabItem {
-                    Label("Story", systemImage: "book")
+                    Label("Hobbies", systemImage: "sun.max")
                 }
-                .tag(1)
-            RandomFactsView()
+            GoalsView()
                 .tabItem {
-                    Label("Random Facts", systemImage: "info.circle")
+                    Label("Goals", systemImage: "soccerball")
                 }
-                .tag(2)
+//            RandomFactsView()
+//                .tabItem {
+//                    Label("Random Facts", systemImage: "info.circle")
+//                }
+//                .tag(2)
             
         }
+        .accentColor(Color(red: 37/255, green: 89/255, blue: 51/255))
+        .environment(\.font, .custom("LibreBaskerville-Regular", size: 16))
     }
 }
 #Preview {

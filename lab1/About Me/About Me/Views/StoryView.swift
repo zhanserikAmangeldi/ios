@@ -8,8 +8,7 @@ struct StoryView: View {
         NavigationView {
             VStack {
                 Text("My Story")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.customTitle)
                 
                 List {
                     ForEach(information.story, id: \.topic) { story in
