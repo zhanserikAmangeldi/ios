@@ -35,11 +35,6 @@ struct CarouselView: View {
                         }
                     )
                 }
-//                .background(Color(.red))
-//                .frame(
-//                    maxWidth: scrollViewContentSize.width,
-//                    maxHeight: scrollViewContentSize.height
-//                )
                 .scrollPosition(id: $scrollID)
                 .scrollTargetBehavior(.paging)
                 IndicatorView(imageCount: images.count, scrollID: $scrollID)
@@ -60,7 +55,7 @@ struct IndicatorView: View {
                         scrollID = indicator
                     }
                 } label: {
-                    Image(systemName: "circle.fill").font(.system(size: 8)).foregroundStyle(indicator == (scrollID ?? 0) ? Color(.black) : Color(.lightGray))
+                    Image(systemName: "circle.fill").font(.system(size: 8)).foregroundStyle(indicator == (scrollID ?? 0) ? Color.PrimaryColor : Color(.lightGray))
                 }
             }
         }

@@ -8,6 +8,17 @@
 		<string>LibreBaskerville-Bold.ttf</string>
 		<string>LibreBaskerville-Italic.ttf</string>
 		<string>LibreBaskerville-Regular.ttf</string>
+		<string>Montserrat-Italic.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
+		<string>AtkinsonHyperlegibleNext-Bold.ttf</string>
+		<string>AtkinsonHyperlegibleNext-ExtraBold.ttf</string>
+		<string>AtkinsonHyperlegibleNext-Medium.ttf</string>
+		<string>AtkinsonHyperlegibleNext-Regular.ttf</string>
+		<string>AtkinsonHyperlegibleNext-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

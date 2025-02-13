@@ -27,13 +27,13 @@ struct RandomFactsView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
                     .padding()
 
-                
+
             }
-            
+
             Button("New Fact") {
                 fact = information.randomFacts.randomElement()!
             }.buttonStyle(.borderedProminent).controlSize(.large)
-            
+
             Spacer()
         }
     }

@@ -7,7 +7,7 @@
 		<key>About Me.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<true />
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
@@ -17,7 +17,7 @@
 		<key>5E0A7FC32D4E7D0400C37627</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 	</dict>
 </dict>

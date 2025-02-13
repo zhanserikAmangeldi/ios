@@ -9,9 +9,11 @@ struct Goal: Identifiable {
 
 struct GoalsView: View {
     let goals: [Goal] = [
+        Goal(title: "Find the Internship as Backend Dev", description: "Find the Internship on Backend Dev, Golang or PHP on the summer.", year: "2025"),
+        Goal(title: "Take the route \"МАК\"", description: "One of the most interesting routes in Almaty due to the fact that in one day you can visit 4 peaks(all 3k km) at once.", year: "2025" ),
+        Goal(title: "Climb to the first 4k km peak in the Almaty", description: "I want to climb on of the nearest 4k peaks in Almaty, I check the list and found the best one is \"Пик Карнизный\".", year: "2025" ),
+        Goal(title: "Find the Full-time Job as Backend Dev", description: "After the Internship I hope to find job on full-time(dream).", year: "2025"),
         Goal(title: "Graduate from KBTU", description: "Complete my degree in Information Systems by 2026.", year: "2026"),
-        Goal(title: "Become a Mobile Developer", description: "Master iOS and Android development to work on innovative projects.", year: "2027"),
-        Goal(title: "Travel the World", description: "Visit at least 10 different countries and explore new cultures.", year: "2028"),
         Goal(title: "Climb a Famous Peak", description: "Challenge myself by reaching the summit of a well-known mountain.", year: "2030")
     ]
     
@@ -23,19 +25,22 @@ struct GoalsView: View {
                     .edgesIgnoringSafeArea(.top)
                     .containerRelativeFrame(.vertical, count: 100, span: 20 , spacing: 0)
                 Text("My Goals & Dreams")
-                    .font(.largeTitle)
-                    .bold()
+                    .font(.customTitle1)
                     .foregroundColor(.white)
                     .padding()
             }
             List {
                 if goals.isEmpty {
                     Text("Nothing")
-                        .font(.customTitle)
+                        .font(.customTitle2)
                         .offset(y: 100)
                 } else {
-                    ForEach(goals) { goal in
-                        GoalCardView(goal: goal)
+                    ForEach(Array(goals.enumerated()), id: \.element.id) { index, goal in
+                        if index == goals.count - 1 {
+                            GoalCardView(goal: goal, last: false)
+                        } else {
+                            GoalCardView(goal: goal, last: true)
+                        }
                     }
                     .listRowSeparator(.hidden)
 
@@ -49,7 +54,7 @@ struct GoalsView: View {
 }
 
 
-func GoalCardView(goal: Goal)->some View {
+func GoalCardView(goal: Goal, last: Bool)->some View {
     HStack(alignment: .top, spacing: 30) {
         VStack(spacing: 10) {
             Circle()
@@ -57,26 +62,29 @@ func GoalCardView(goal: Goal)->some View {
                 .frame(width: 15, height: 15)
                 .background(
                     Circle()
-                        .stroke(.black, lineWidth: 1)
+                        .stroke(Color.SecondaryColor, lineWidth: 1)
                         .padding(-3)
                 )
-            Rectangle()
-                .fill(.black)
-                .frame(width: 3)
+            if last {
+                Rectangle()
+                    .fill(Color.SecondaryColor)
+                    .frame(width: 3)
+            }
         }
         
         VStack {
             HStack(alignment: .top, spacing: 20) {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(goal.title)
-                        .font(.headline )
+                        .font(.customTitle2)
                     Text(goal.description)
-                        .font(.customCallout)
+                        .font(.customBody)
                         .foregroundColor(.white)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(goal.year)
+                    .font(.customCallout)
                 
             }
             
@@ -85,8 +93,7 @@ func GoalCardView(goal: Goal)->some View {
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            Color(.accent)
-                .cornerRadius(25)
+            Color.SecondaryColor.cornerRadius(25)
         )
     }
     .frame(maxWidth: .infinity, alignment: .leading)

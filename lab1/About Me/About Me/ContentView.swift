@@ -10,6 +10,20 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab = 0
 
+    // https://www.hackingwithswift.com/forums/swiftui/custom-font-in-navigation-title-and-back-button/22989
+    init() {
+        let fontTab = [NSAttributedString.Key.font: UIFont(name: "AtkinsonHyperlegibleNext-SemiBold", size: 10)!]
+
+        UITabBarItem.appearance().setTitleTextAttributes(fontTab, for: .normal)
+
+
+        let fontNav: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "AtkinsonHyperlegibleNext-SemiBold", size: 17)!,
+        ]
+        UINavigationBar.appearance().titleTextAttributes = fontNav
+        UIBarButtonItem.appearance().setTitleTextAttributes(fontNav, for: .normal)
+     }
+
     var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
@@ -17,29 +31,19 @@ struct ContentView: View {
                     Label("Home", systemImage: "person")
                 }
                 .tag(0)
-
-//            StoryView(selectedTab: $selectedTab)
-//                .tabItem {
-//                    Label("Story", systemImage: "book")
-//                }
-//                .tag(1)
-            HobbiesView()
+            HobbiesView(selectedTab: $selectedTab)
                 .tabItem {
                     Label("Hobbies", systemImage: "sun.max")
                 }
+                .tag(1)
             GoalsView()
                 .tabItem {
                     Label("Goals", systemImage: "soccerball")
                 }
-//            RandomFactsView()
-//                .tabItem {
-//                    Label("Random Facts", systemImage: "info.circle")
-//                }
-//                .tag(2)
-            
+
         }
-        .accentColor(Color(red: 37/255, green: 89/255, blue: 51/255))
-        .environment(\.font, .custom("LibreBaskerville-Regular", size: 16))
+        .accentColor(.PrimaryColor)
+        .environment(\.font, .customBody)
     }
 }
 #Preview {

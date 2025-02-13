@@ -23,7 +23,6 @@ struct Fact {
     let image: String
 }
 
-
 let information = Info(
     image: "Photo",
     name: "Zhanserik Amangeldi",
