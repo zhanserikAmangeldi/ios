@@ -11,7 +11,8 @@ class ChantsViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        tableView.register(TeamTableViewCell.self, forCellReuseIdentifier: TeamTableViewCell.cellid)
+
         return tableView
     }()
     
@@ -24,6 +25,7 @@ class ChantsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.view.backgroundColor = .systemBlue
     }
 }
@@ -49,21 +51,12 @@ private extension ChantsViewController {
             
 extension ChantsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        switch indexPath.row {
-        case 0:
-            cell.backgroundColor = .systemBlue
-        case 1:
-            cell.backgroundColor = .systemRed
-        case 2:
-            cell.backgroundColor = .systemYellow
-        default:
-            break
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: TeamTableViewCell.cellid, for: indexPath) as! TeamTableViewCell
+        cell.configure()
         return cell
     }
 }
