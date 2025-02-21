@@ -1,5 +1,9 @@
 import UIKit
 
+protocol TeamTableViewCellDelegate: AnyObject {
+    func didTapPlayback(for team: Team)
+}
+
 class TeamTableViewCell: UITableViewCell {
     
     static let cellid = "TeamTableViewCell"
@@ -65,20 +69,38 @@ class TeamTableViewCell: UITableViewCell {
         label1.textColor = .white
         return label1
     }()
+    
+    private weak var delegate: TeamTableViewCellDelegate?
+    private var team: Team?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         containerView.layer.cornerRadius = 10
     }
-    func configure() {
-        containerView.backgroundColor = TeamType.arsenal.background 
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.team = nil
+        self.delegate = nil
+        self.contentView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func configure(with item: Team, delegate: TeamTableViewCellDelegate) {
         
-        badgeImageView.image = TeamType.arsenal.badge
-        playbackBtn.setImage(UIImage(systemName: "play.circle.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 32)), for: .normal)
+        self.team = item
+        self.delegate = delegate
         
-        nameLb1.text = "Arsenal"
-        foundedLb1.text = "Founded: 1886"
-        jobLb1.text = "Stadium: Emirates Stadium"
-        infoLb1.text = "Ground: 60,000"
+        playbackBtn.addTarget(self, action: #selector(didTapPlayback), for: .touchUpInside)
+        
+        containerView.backgroundColor = item.id.background
+        
+        badgeImageView.image = item.id.badge
+        playbackBtn.setImage(item.isPlaying ? Assets.pause : Assets.play, for: .normal)
+        
+        nameLb1.text = item.name
+        foundedLb1.text = item.founded
+        jobLb1.text = "Current \(item.manager.job.rawValue): \(item.manager.name)"
+        infoLb1.text = item.info
         
         self.contentView.addSubview(containerView)
         
@@ -103,14 +125,20 @@ class TeamTableViewCell: UITableViewCell {
             
             contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             contentStackView.leadingAnchor.constraint(equalTo: badgeImageView.trailingAnchor, constant: 8),
-            contentStackView.trailingAnchor.constraint(equalTo: playbackBtn.leadingAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            contentStackView.trailingAnchor.constraint(equalTo: playbackBtn.leadingAnchor, constant: -8),
+            contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
             
             playbackBtn.heightAnchor.constraint(equalToConstant: 44),
             playbackBtn.widthAnchor.constraint(equalToConstant: 44),
             playbackBtn.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
             playbackBtn.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
         ])
+    }
+    
+    @objc func didTapPlayback() {
+        if let team = team {
+            delegate?.didTapPlayback(for: team)
+        }
     }
     
 }

@@ -16,6 +16,7 @@ class ChantsViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var teamsViewModel = TeamsViewModel()
     
     // MARK: - Lifecycle
     
@@ -26,15 +27,18 @@ class ChantsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBlue
+        self.view.backgroundColor = .white
     }
 }
 
 private extension ChantsViewController {
     
     func setup() {
+        self.navigationController?.navigationBar.topItem?.title = "Football Chants"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         self.view.addSubview(tableView)
         
@@ -51,12 +55,21 @@ private extension ChantsViewController {
             
 extension ChantsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return teamsViewModel.teams.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let team = teamsViewModel.teams[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: TeamTableViewCell.cellid, for: indexPath) as! TeamTableViewCell
-        cell.configure()
+        cell.configure(with: team, delegate: self)
         return cell
     }
+}
+
+extension ChantsViewController: TeamTableViewCellDelegate {
+    func didTapPlayback(for team: Team) {
+        teamsViewModel.togglePlayback(for: team)
+        tableView.reloadData()
+    }
+    
 }

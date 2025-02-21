@@ -1,8 +1,8 @@
 import Foundation
 
 enum JobType: String {
-    case manager
-    case headCoach
+    case manager = "Manager"
+    case headCoach = "Head Coach"
 }
 
 struct Manager {
